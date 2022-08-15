@@ -58,6 +58,7 @@ data class BottomSheetItem(val title: String, val icon: ImageVector)
 @ExperimentalFoundationApi
 @Composable
 fun BottomSheetDemo() {
+    //Lets create list to show in bottom sheet
     val bottomSheetItems = listOf(
         BottomSheetItem(title = "Notification", icon = Icons.Default.Notifications),
         BottomSheetItem(title = "Mail", icon = Icons.Default.MailOutline),
@@ -66,6 +67,8 @@ fun BottomSheetDemo() {
         BottomSheetItem(title = "Favorite", icon = Icons.Default.Favorite),
         BottomSheetItem(title = "Settings", icon = Icons.Default.Settings)
     )
+
+    //Lets define bottomSheetScaffoldState which will hold the state of Scaffold
     val bottomSheetScaffoldState = rememberBottomSheetScaffoldState(
         bottomSheetState = BottomSheetState(BottomSheetValue.Collapsed)
     )
@@ -74,6 +77,7 @@ fun BottomSheetDemo() {
         scaffoldState = bottomSheetScaffoldState,
         sheetShape = RoundedCornerShape(topEnd = 30.dp),
         sheetContent = {
+            //Ui for bottom sheet
             Column(
                 content = {
 
@@ -105,7 +109,7 @@ fun BottomSheetDemo() {
                                 Spacer(modifier = Modifier.padding(8.dp))
                                 Icon(
                                     bottomSheetItems[it].icon,
-                                    "",
+                                    bottomSheetItems[it].title,
                                     tint = Color.White
                                 )
                                 Spacer(modifier = Modifier.padding(8.dp))
@@ -130,6 +134,7 @@ fun BottomSheetDemo() {
         },
         sheetPeekHeight = 0.dp,
         topBar = {
+            //top app bar ui
             TopAppBar(
                 title = { Text("Bottom Sheet Demo") },
                 backgroundColor = Color.White,
@@ -137,6 +142,9 @@ fun BottomSheetDemo() {
             )
         }
     ) {
+
+
+        //Add button to open bottom sheet
         Column(modifier = Modifier.fillMaxSize()) {
             Button(
                 modifier = Modifier
